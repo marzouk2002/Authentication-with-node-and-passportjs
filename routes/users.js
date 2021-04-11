@@ -36,7 +36,7 @@ router.post('/register', (req, res) => {
         res.render('register', { errors, name, email, password, password2})
     } else {
         User.findOne({email: email}).then((user)=>{
-            if(use) {
+            if(user) {
                 errors.push({msg: 'Email is already registered'})
                 res.render('register', { errors, name, email, password, password2})
             } else {
@@ -54,7 +54,8 @@ router.post('/register', (req, res) => {
 
                         newUser.save()
                             .then(user => {
-                                res.redirect('/')
+                                req.flash('success_msg', 'You are now registered and can log in');
+                                res.redirect('/users/login')
                             })
                             .catch(err => console.log(err))
                     })
