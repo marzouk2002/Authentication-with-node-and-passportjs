@@ -1,6 +1,8 @@
 const express = require('express')
 const expressLayouts = require('express-ejs-layouts')
 const mongoose = require('mongoose')
+const falsh = require('connect-flash')
+const session = require('express-session')
 
 const app = express()
 
@@ -17,6 +19,8 @@ app.set('view engine', 'ejs')
 
 // Bodyparser
 app.use(express.urlencoded({ extended: false }))
+
+// Express session
 
 // Routes
 app.use('/', require('./routes/index'))
